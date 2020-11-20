@@ -1,0 +1,13 @@
+commands:
+  zip:
+    -
+      cmd: zip -qr dist.zip dist
+      desc: 将一个文件夹压缩
+  git:
+    -
+      cmd: git checkout -b dev_0.1 origin/dev_0.1
+      desc: 将远程分支检出一个本地分支
+  grep:
+    -
+      cmd: grep -o "1\d\d"
+      desc: 只打印匹配部分
