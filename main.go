@@ -14,13 +14,17 @@ func main() {
 		name := c.Param("name")
 		commands := resource.Commands[name]
 		if commands == nil {
-			c.Data(http.StatusOK, "text/plain", []byte(fmt.Sprintf("not found: %s\n", name)))
+			c.Data(http.StatusOK, "text/plain; charset=utf-8", []byte(fmt.Sprintf("not found: %s\n", name)))
 		} else {
-			result := ""
+			result := "\n"
+			// 格式化结果如下:
+			// # desc
+			// $ cmd
 			for _, command := range commands {
-				result = result + command.Cmd + "\t\t" + command.Desc + "\n"
+				result = result + "# " + command.Desc + "\n$ " + command.Cmd + "\n\n"
 			}
-			c.Data(http.StatusOK, "text/plain", []byte(fmt.Sprintf("%s", result)))
+			result = result + "\n"
+			c.Data(http.StatusOK, "text/plain; charset=utf-8", []byte(fmt.Sprintf("%s", result)))
 		}
 	})
 	err := r.Run(":10010")

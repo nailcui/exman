@@ -11,3 +11,103 @@ commands:
     -
       cmd: grep -o "1\d\d"
       desc: 只打印匹配部分
+    -
+      cmd: grep -v "INFO"
+      desc: 不显示匹配到的行
+  go:
+    -
+      cmd: GOOS=linux GOARCH=amd64 go build
+      desc: go交叉编译Linux-amd64应用
+  netstat:
+    -
+      cmd: netstat -antp
+      desc: 以ip格式展示所有tcp连接信息，及相关pid
+    -
+      cmd: netstat -ntlp
+      desc: 以ip格式展示tcp监听信息，及关联pid
+  ps:
+    -
+      cmd: ps -ef
+      desc: 展示所有进程的详细信息
+  awk:
+    -
+      cmd: awk '$2 == 189 {print $2}'
+      desc: 匹配第二列等于189的行，并输出第二列
+    -
+      cmd: awk '{print $NF}'
+      desc: 打印第二列
+    -
+      cmd: "awk '{print NR\": \" $2}'"
+      desc: 打印第二列，并打印行号
+    -
+      cmd: awk '$2 > 150 {print $1, $2 + 2}'
+      desc: 匹配第二列大于150的行，并输出指定信息
+  curl:
+    -
+      cmd: curl -o ip.json https://httpbin.org/ip
+      desc: 输出到文件, 当服务器上未安装wget时，使用此命令下载文件
+  wc:
+    -
+      cmd: cat a.log | wc -l
+      desc: 统计行数
+    -
+      cmd: cat a.log | wc -w
+      desc: 统计字数
+  scp:
+    -
+      cmd: scp dist.zip root@192.168.0.2:/root/path/
+      desc: 文件传输
+  nc:
+    -
+      cmd: nc -l -p 8802 > filename.tar.gz
+      desc: 准备接受文件
+    -
+      cmd: nc 10.7.0.42 8802 < filename.tar.gz
+      desc: 发送文件
+  ffmpeg:
+    -
+      cmd: ffmpeg -i input.mp4
+      desc: 查看文件详情
+    -
+      cmd: ffmpeg -i input.mp4 -fs 10M output.mp4
+      desc: 指定目标文件大小来压缩
+  time:
+    -
+      cmd: time ffmpeg -i input.mp4
+      desc: 统计命令的执行时间
+  netstat:
+    -
+      cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+      desc: 查看各个连接状态的数量
+  systemctl:
+    -
+      cmd: systemctl --type=service
+      desc: 查看所有的服务
+    -
+      cmd: systemctl start etcd.service
+      desc: 启动服务
+    -
+      cmd: systemctl sotp etcd.service
+      desc: 停止服务
+    -
+      cmd: systemctl restart etcd.service
+      desc: 重启服务
+    -
+      cmd: systemctl kill etcd.service
+      desc: 杀死一个服务
+    -
+      cmd: systemctl reload etcd.service
+      desc: 重新家在一个服务的配置文件
+    -
+      cmd: systemctl daemon-reload
+      desc: 重载所有修改过的配置文件
+    -
+      cmd: systemctl enable etcd.service
+      desc: 开启开机自启动
+    -
+      cmd: systemctl disable etcd.service
+      desc: 取消开机自启动
+  chown:
+    -
+      cmd: chown -R admin:admin /data
+      desc: 将某个目录的用户、组所有者改为admin
