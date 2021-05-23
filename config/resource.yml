@@ -7,6 +7,9 @@ commands:
     -
       cmd: git checkout -b dev_0.1 origin/dev_0.1
       desc: 将远程分支检出一个本地分支
+    -
+      cmd: git reset HEAD -- main
+      desc: 将文件main从暂存区移除，单不删除文件
   grep:
     -
       cmd: grep -o "1\d\d"
@@ -25,10 +28,16 @@ commands:
     -
       cmd: netstat -ntlp
       desc: 以ip格式展示tcp监听信息，及关联pid
-  ps:
+    -
+      cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+      desc: 查看各个连接状态的数量
+    ps:
     -
       cmd: ps -ef
       desc: 展示所有进程的详细信息
+    -
+      cmd: ps -p 10211 -o lstart
+      desc: 查看进程的启动时间
   awk:
     -
       cmd: awk '$2 == 189 {print $2}'
@@ -75,10 +84,6 @@ commands:
     -
       cmd: time ffmpeg -i input.mp4
       desc: 统计命令的执行时间
-  netstat:
-    -
-      cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
-      desc: 查看各个连接状态的数量
   systemctl:
     -
       cmd: systemctl --type=service
@@ -111,3 +116,11 @@ commands:
     -
       cmd: chown -R admin:admin /data
       desc: 将某个目录的用户、组所有者改为admin
+  mvn:
+    -
+      cmd: mvn clean package -Dmaven.test.skip=true
+      desc: 打包，跳过测试
+  nohup:
+    -
+      cmd: nohup start.sh > info.log 2>&1 &
+      desc: 后台运行，并将标准输出&错误输出一同输出到文件
