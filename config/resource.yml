@@ -21,6 +21,8 @@ commands:
     -
       cmd: GOOS=linux GOARCH=amd64 go build
       desc: go交叉编译Linux-amd64应用
+    - cmd: go tool compile -S main.go
+      desc: 查看汇编代码
   netstat:
     -
       cmd: netstat -antp
@@ -31,7 +33,7 @@ commands:
     -
       cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
       desc: 查看各个连接状态的数量
-    ps:
+  ps:
     -
       cmd: ps -ef
       desc: 展示所有进程的详细信息
@@ -112,6 +114,11 @@ commands:
     -
       cmd: systemctl disable etcd.service
       desc: 取消开机自启动
+  journalctl:
+    - cmd: journalctl -fu kubelet
+      desc: 滚动查看某个服务的最近日志
+    - cmd: journalctl -n 100 -fu kubelet
+      desc: 滚动查看某个服务的最近100条日志
   chown:
     -
       cmd: chown -R admin:admin /data
@@ -124,3 +131,25 @@ commands:
     -
       cmd: nohup start.sh > info.log 2>&1 &
       desc: 后台运行，并将标准输出&错误输出一同输出到文件
+  su:
+    - cmd: su -sh *
+      desc: 查看当前文件夹下个文件、目录的磁盘占用情况
+  df:
+    - cmd: df -h
+      desc: 查看各个磁盘的使用情况
+  dd:
+    - cmd: dd if=/dev/zero of=ccdata1 bs=1M count=2048
+      desc: 生成一个2G的空文件
+
+  iptables:
+    - cmd: iptables -t nat -A PREROUTING --dst 172.28.57.30 -p tcp --dport 10001 -j DNAT --to-destination 172.28.57.30:10002
+      desc: 配置转发规则
+  kubectl:
+    - cmd: kubectl label nodes <node-name> <label-key>=<label-value>
+      desc: 为node设置标签
+    - cmd: kubectl run curl --image=radial/busyboxplus:curl -i --tty
+      desc: 启动一个curl镜像，并进入交互命令行
+    - cmd: kubectl attach curl -c curl -i -t
+      desc: 进入当前的容器
+    - cmd: kubectl exec -it curl -c curl -n default -- ping 172.8.32.65
+      desc: 在pod内执行命令
