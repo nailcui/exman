@@ -1,155 +1,201 @@
 commands:
   zip:
-    -
-      cmd: zip -qr dist.zip dist
-      desc: 将一个文件夹压缩
+    tag: []
+    examples:
+      -
+        cmd: zip -qr dist.zip dist
+        desc: 将一个文件夹压缩
   git:
-    -
-      cmd: git checkout -b dev_0.1 origin/dev_0.1
-      desc: 将远程分支检出一个本地分支
-    -
-      cmd: git reset HEAD -- main
-      desc: 将文件main从暂存区移除，单不删除文件
+    tag: []
+    examples:
+      -
+        cmd: git checkout -b dev_0.1 origin/dev_0.1
+        desc: 将远程分支检出一个本地分支
+      -
+        cmd: git reset HEAD -- main
+        desc: 将文件main从暂存区移除，单不删除文件
   grep:
-    -
-      cmd: grep -o "1\d\d"
-      desc: 只打印匹配部分
-    -
-      cmd: grep -v "INFO"
-      desc: 不显示匹配到的行
+    tag: []
+    examples:
+      -
+        cmd: grep -o "1\d\d"
+        desc: 只打印匹配部分
+      -
+        cmd: grep -v "INFO"
+        desc: 不显示匹配到的行
   go:
-    -
-      cmd: GOOS=linux GOARCH=amd64 go build
-      desc: go交叉编译Linux-amd64应用
-    - cmd: go tool compile -S main.go
-      desc: 查看汇编代码
+    tag: []
+    examples:
+      -
+        cmd: GOOS=linux GOARCH=amd64 go build
+        desc: go交叉编译Linux-amd64应用
+      - cmd: go tool compile -S main.go
+        desc: 查看汇编代码
   netstat:
-    -
-      cmd: netstat -antp
-      desc: 以ip格式展示所有tcp连接信息，及相关pid
-    -
-      cmd: netstat -ntlp
-      desc: 以ip格式展示tcp监听信息，及关联pid
-    -
-      cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
-      desc: 查看各个连接状态的数量
+    tag: ["port"]
+    examples:
+      -
+        cmd: netstat -antp
+        desc: 以ip格式展示所有tcp连接信息，及相关pid
+      -
+        cmd: netstat -ntlp
+        desc: 以ip格式展示tcp监听信息，及关联pid
+      -
+        cmd: netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+        desc: 查看各个连接状态的数量
   ps:
-    -
-      cmd: ps -ef
-      desc: 展示所有进程的详细信息
-    -
-      cmd: ps -p 10211 -o lstart
-      desc: 查看进程的启动时间
+    tag: []
+    examples:
+      -
+        cmd: ps -ef
+        desc: 展示所有进程的详细信息
+      -
+        cmd: ps -p 10211 -o lstart
+        desc: 查看进程的启动时间
   awk:
-    -
-      cmd: awk '$2 == 189 {print $2}'
-      desc: 匹配第二列等于189的行，并输出第二列
-    -
-      cmd: awk '{print $NF}'
-      desc: 打印第二列
-    -
-      cmd: "awk '{print NR\": \" $2}'"
-      desc: 打印第二列，并打印行号
-    -
-      cmd: awk '$2 > 150 {print $1, $2 + 2}'
-      desc: 匹配第二列大于150的行，并输出指定信息
+    tag: []
+    examples:
+      -
+        cmd: awk '$2 == 189 {print $2}'
+        desc: 匹配第二列等于189的行，并输出第二列
+      -
+        cmd: awk '{print $NF}'
+        desc: 打印第二列
+      -
+        cmd: "awk '{print NR\": \" $2}'"
+        desc: 打印第二列，并打印行号
+      -
+        cmd: awk '$2 > 150 {print $1, $2 + 2}'
+        desc: 匹配第二列大于150的行，并输出指定信息
   curl:
-    -
-      cmd: curl -o ip.json https://httpbin.org/ip
-      desc: 输出到文件, 当服务器上未安装wget时，使用此命令下载文件
+    tag: []
+    examples:
+      -
+        cmd: curl -o ip.json https://httpbin.org/ip
+        desc: 输出到文件, 当服务器上未安装wget时，使用此命令下载文件
   wc:
-    -
-      cmd: cat a.log | wc -l
-      desc: 统计行数
-    -
-      cmd: cat a.log | wc -w
-      desc: 统计字数
+    tag: []
+    examples:
+      -
+        cmd: cat a.log | wc -l
+        desc: 统计行数
+      -
+        cmd: cat a.log | wc -w
+        desc: 统计字数
   scp:
-    -
-      cmd: scp dist.zip root@192.168.0.2:/root/path/
-      desc: 文件传输
+    tag: []
+    examples:
+      -
+        cmd: scp dist.zip root@192.168.0.2:/root/path/
+        desc: 文件传输
   nc:
-    -
-      cmd: nc -l -p 8802 > filename.tar.gz
-      desc: 准备接受文件
-    -
-      cmd: nc 10.7.0.42 8802 < filename.tar.gz
-      desc: 发送文件
+    tag: []
+    examples:
+      -
+        cmd: nc -l -p 8802 > filename.tar.gz
+        desc: 准备接受文件
+      -
+        cmd: nc 10.7.0.42 8802 < filename.tar.gz
+        desc: 发送文件
   ffmpeg:
-    -
-      cmd: ffmpeg -i input.mp4
-      desc: 查看文件详情
-    -
-      cmd: ffmpeg -i input.mp4 -fs 10M output.mp4
-      desc: 指定目标文件大小来压缩
+    tag: []
+    examples:
+      -
+        cmd: ffmpeg -i input.mp4
+        desc: 查看文件详情
+      -
+        cmd: ffmpeg -i input.mp4 -fs 10M output.mp4
+        desc: 指定目标文件大小来压缩
   time:
-    -
-      cmd: time ffmpeg -i input.mp4
-      desc: 统计命令的执行时间
+    tag: []
+    examples:
+      -
+        cmd: time ffmpeg -i input.mp4
+        desc: 统计命令的执行时间
   systemctl:
-    -
-      cmd: systemctl --type=service
-      desc: 查看所有的服务
-    -
-      cmd: systemctl start etcd.service
-      desc: 启动服务
-    -
-      cmd: systemctl sotp etcd.service
-      desc: 停止服务
-    -
-      cmd: systemctl restart etcd.service
-      desc: 重启服务
-    -
-      cmd: systemctl kill etcd.service
-      desc: 杀死一个服务
-    -
-      cmd: systemctl reload etcd.service
-      desc: 重新家在一个服务的配置文件
-    -
-      cmd: systemctl daemon-reload
-      desc: 重载所有修改过的配置文件
-    -
-      cmd: systemctl enable etcd.service
-      desc: 开启开机自启动
-    -
-      cmd: systemctl disable etcd.service
-      desc: 取消开机自启动
+    tag: []
+    examples:
+      -
+        cmd: systemctl --type=service
+        desc: 查看所有的服务
+      -
+        cmd: systemctl start etcd.service
+        desc: 启动服务
+      -
+        cmd: systemctl sotp etcd.service
+        desc: 停止服务
+      -
+        cmd: systemctl restart etcd.service
+        desc: 重启服务
+      -
+        cmd: systemctl kill etcd.service
+        desc: 杀死一个服务
+      -
+        cmd: systemctl reload etcd.service
+        desc: 重新家在一个服务的配置文件
+      -
+        cmd: systemctl daemon-reload
+        desc: 重载所有修改过的配置文件
+      -
+        cmd: systemctl enable etcd.service
+        desc: 开启开机自启动
+      -
+        cmd: systemctl disable etcd.service
+        desc: 取消开机自启动
   journalctl:
-    - cmd: journalctl -fu kubelet
-      desc: 滚动查看某个服务的最近日志
-    - cmd: journalctl -n 100 -fu kubelet
-      desc: 滚动查看某个服务的最近100条日志
+    tag: []
+    examples:
+      - cmd: journalctl -fu kubelet
+        desc: 滚动查看某个服务的最近日志
+      - cmd: journalctl -n 100 -fu kubelet
+        desc: 滚动查看某个服务的最近100条日志
   chown:
-    -
-      cmd: chown -R admin:admin /data
-      desc: 将某个目录的用户、组所有者改为admin
+    tag: []
+    examples:
+      -
+        cmd: chown -R admin:admin /data
+        desc: 将某个目录的用户、组所有者改为admin
   mvn:
-    -
-      cmd: mvn clean package -Dmaven.test.skip=true
-      desc: 打包，跳过测试
+    tag: []
+    examples:
+      -
+        cmd: mvn clean package -Dmaven.test.skip=true
+        desc: 打包，跳过测试
   nohup:
-    -
-      cmd: nohup start.sh > info.log 2>&1 &
-      desc: 后台运行，并将标准输出&错误输出一同输出到文件
+    tag: []
+    examples:
+      -
+        cmd: nohup start.sh > info.log 2>&1 &
+        desc: 后台运行，并将标准输出&错误输出一同输出到文件
   su:
-    - cmd: su -sh *
-      desc: 查看当前文件夹下个文件、目录的磁盘占用情况
+    tag: []
+    examples:
+      - cmd: su -sh *
+        desc: 查看当前文件夹下个文件、目录的磁盘占用情况
   df:
-    - cmd: df -h
-      desc: 查看各个磁盘的使用情况
+    tag: []
+    examples:
+      - cmd: df -h
+        desc: 查看各个磁盘的使用情况
   dd:
-    - cmd: dd if=/dev/zero of=ccdata1 bs=1M count=2048
-      desc: 生成一个2G的空文件
+    tag: []
+    examples:
+      - cmd: dd if=/dev/zero of=ccdata1 bs=1M count=2048
+        desc: 生成一个2G的空文件
 
   iptables:
-    - cmd: iptables -t nat -A PREROUTING --dst 172.28.57.30 -p tcp --dport 10001 -j DNAT --to-destination 172.28.57.30:10002
-      desc: 配置转发规则
+    tag: []
+    examples:
+      - cmd: iptables -t nat -A PREROUTING --dst 172.28.57.30 -p tcp --dport 10001 -j DNAT --to-destination 172.28.57.30:10002
+        desc: 配置转发规则
   kubectl:
-    - cmd: kubectl label nodes <node-name> <label-key>=<label-value>
-      desc: 为node设置标签
-    - cmd: kubectl run curl --image=radial/busyboxplus:curl -i --tty
-      desc: 启动一个curl镜像，并进入交互命令行
-    - cmd: kubectl attach curl -c curl -i -t
-      desc: 进入当前的容器
-    - cmd: kubectl exec -it curl -c curl -n default -- ping 172.8.32.65
-      desc: 在pod内执行命令
+    tag: []
+    examples:
+      - cmd: kubectl label nodes <node-name> <label-key>=<label-value>
+        desc: 为node设置标签
+      - cmd: kubectl run curl --image=radial/busyboxplus:curl -i --tty
+        desc: 启动一个curl镜像，并进入交互命令行
+      - cmd: kubectl attach curl -c curl -i -t
+        desc: 进入当前的容器
+      - cmd: kubectl exec -it curl -c curl -n default -- ping 172.8.32.65
+        desc: 在pod内执行命令
