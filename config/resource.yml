@@ -14,6 +14,18 @@ commands:
       -
         cmd: git reset HEAD -- main
         desc: 将文件main从暂存区移除，单不删除文件
+      -
+        cmd: git rebase -i upstream/develop
+        desc: rebase，变基upstream的develop
+      -
+        cmd: git rebase -i HEAD~2
+        desc: 合并最近2次提交
+      -
+        cmd: git rebase 232382
+        desc: 合并提交
+      -
+        cmd: git rebase 23923 3434
+        desc: 合并提交
   grep:
     tag: []
     examples:
@@ -89,7 +101,7 @@ commands:
         cmd: scp dist.zip root@192.168.0.2:/root/path/
         desc: 文件传输
   nc:
-    tag: []
+    tag: ["net"]
     examples:
       -
         cmd: nc -l -p 8802 > filename.tar.gz
@@ -113,7 +125,7 @@ commands:
         cmd: time ffmpeg -i input.mp4
         desc: 统计命令的执行时间
   systemctl:
-    tag: []
+    tag: ["sys"]
     examples:
       -
         cmd: systemctl --type=service
@@ -143,7 +155,7 @@ commands:
         cmd: systemctl disable etcd.service
         desc: 取消开机自启动
   journalctl:
-    tag: []
+    tag: ["sys", "log"]
     examples:
       - cmd: journalctl -fu kubelet
         desc: 滚动查看某个服务的最近日志
@@ -168,17 +180,17 @@ commands:
         cmd: nohup start.sh > info.log 2>&1 &
         desc: 后台运行，并将标准输出&错误输出一同输出到文件
   su:
-    tag: []
+    tag: ["disk"]
     examples:
       - cmd: su -sh *
         desc: 查看当前文件夹下个文件、目录的磁盘占用情况
   df:
-    tag: []
+    tag: ["disk"]
     examples:
       - cmd: df -h
         desc: 查看各个磁盘的使用情况
   dd:
-    tag: []
+    tag: ["file"]
     examples:
       - cmd: dd if=/dev/zero of=ccdata1 bs=1M count=2048
         desc: 生成一个2G的空文件

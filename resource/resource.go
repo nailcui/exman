@@ -43,7 +43,7 @@ func init() {
 // 每分钟从 github 同步一次 最新数据
 func sync() {
 	url := "https://raw.githubusercontent.com/nailcui/exman/master/config/resource.yml"
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(10 * time.Minute)
 	for {
 		<- ticker.C
 		fmt.Println("sync start")

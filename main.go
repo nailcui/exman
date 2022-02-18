@@ -23,7 +23,7 @@ func main() {
 			returnExamples(c, command.Examples)
 		}
 	})
-	err := r.Run(":10010")
+	err := r.Run(":8082")
 	if err != nil {
 		log.Panicln(err)
 	}
